@@ -29,4 +29,11 @@ function getComputerChoice() {
     return randomChoice;
 }
 
+function getHumanChoice() {
+    //Not doing input validation as it's not a requirement for now
+    let humanChoice = prompt("Choose rock, paper or scissor");
+    return humanChoice;
+}
+
 console.log(getComputerChoice());
+console.log(getHumanChoice());
