@@ -1,39 +1,23 @@
 // console.log("Hello!");
 
-let rock = "rock";
-let paper = "paper";
-let scissor = "scissor";
+const choices = ["rock", "paper", "scissors"];
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
 function getComputerChoice() {
-    let randomNumber = getRandomInt(3);
-    let randomChoice = "";
-
-    switch(randomNumber) {
-        case 0:
-            randomChoice = rock;
-            break;
-        case 1:
-            randomChoice = paper;
-            break;
-        case 2:
-            randomChoice = scissor;
-            break;
-        default:
-            break;
-    }
-
-    return randomChoice;
+    return choices[getRandomInt(choices.length)];
 }
 
 function getHumanChoice() {
     //Not doing input validation as it's not a requirement for now
-    let humanChoice = prompt("Choose rock, paper or scissor");
-    return humanChoice;
+    let humanChoice = prompt("Choose rock, paper or scissors");
+    return humanChoice.toLowerCase();
 }
 
 console.log(getComputerChoice());
 console.log(getHumanChoice());
+
+let humanScore = 0;
+let computerScore = 0;
