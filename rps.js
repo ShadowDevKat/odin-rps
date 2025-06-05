@@ -1,3 +1,89 @@
+//Get references to all sections
+const startSection = document.querySelector('.start-section');
+const playSection = document.querySelector('.play-section');
+const endSection = document.querySelector('.end-section');
+
+function toggleDisplay(element) {
+    const originalDisplay = element.dataset.display || 'block';
+
+    if (element.style.display === 'none') {
+        element.style.display = originalDisplay;
+    } else {
+        element.dataset.display = element.style.display || getComputedStyle(element).display;
+        element.style.display = 'none';
+    }
+}
+
+toggleDisplay(playSection);
+toggleDisplay(endSection);
+
+//Get Reference to body
+const mainBody = document.querySelector('body');
+
+//Hook events to all buttons
+mainBody.addEventListener('click', (e) => {
+    let target = e.target;
+    switch (target.id) {
+        case 'start-btn':
+            startGame();
+            break;
+        case 'rock':
+        case 'paper':
+        case 'scissors':
+            playRound(target.id, getComputerChoice());
+            break;
+        case 'reset-btn':
+            toggleDisplay(endSection);
+            toggleDisplay(playSection);
+            init();
+            break;
+        default:
+            break;
+    }
+});
+
+function startGame() {
+    toggleDisplay(startSection);
+    toggleDisplay(playSection);
+    init();
+}
+function showElement(element) {
+    element.style.visibility = 'visible';
+}
+function hideElement(element) {
+    element.style.visibility = 'hidden';
+}
+
+//Get References to all game stat elements
+const roundTrackerTxt = document.querySelector("#round-tracker");
+const humanScoreTxt = document.querySelector("#player-score");
+const computerScoreTxt = document.querySelector("#computer-score");
+const playerChoiceImg = document.querySelector('#player-choice');
+const computerChoiceImg = document.querySelector('#computer-choice');
+const roundResultTxt = document.querySelector("#round-result");
+const finalResultTxt = document.querySelector("#final-result");
+
+//Game Logic
+let isGameReady = false;
+let humanScore = 0;
+let computerScore = 0;
+let currRound = 0;
+const maxRounds = 5;
+
+function init() {
+    isGameReady = false;
+    humanScore = 0;
+    computerScore = 0;
+    currRound = 0;
+    hideElement(playerChoiceImg);
+    hideElement(computerChoiceImg);
+    updateTextDisplay(roundTrackerTxt, `Current Round: ${currRound}`);
+    updateTextDisplay(humanScoreTxt, `Human Score: ${humanScore}`);
+    updateTextDisplay(computerScoreTxt, `Computer Score: ${computerScore}`);
+    hideElement(roundResultTxt);
+    isGameReady = true;
+}
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -7,115 +93,105 @@ function getComputerChoice() {
     return choices[getRandomInt(choices.length)];
 }
 
-let humanScore = 0;
-let computerScore = 0;
-let currRound = 0;
-const maxRounds = 5;
-
-function init() {
-    humanScore = 0;
-    computerScore = 0;
-    currRound = 0;
-    humanScoreElem.textContent = `Human Score: ${humanScore}`;
-    computerScoreElem.textContent = `Computer Score: ${computerScore}`;
-    roundTrackerElem.textContent = `Current Round: ${currRound}`;
-    updateResult('');
-    resetBtn.classList.toggle("hidden");
-}
-
 function updateScore(winner) {
     if (winner === 0) {
         humanScore++;
-        humanScoreElem.textContent = `Human Score: ${humanScore}`;
+        updateTextDisplay(humanScoreTxt, `Human Score: ${humanScore}`);
+        showElement(roundResultTxt);
+        updateTextDisplay(roundResultTxt, 'You Won the Round');
     }
     else if (winner === 1) {
         computerScore++
-        computerScoreElem.textContent = `Computer Score: ${computerScore}`;
+        updateTextDisplay(computerScoreTxt, `Computer Score: ${computerScore}`);
+        showElement(roundResultTxt);
+        updateTextDisplay(roundResultTxt, 'You Lost the Round');
     }
     else {
+        showElement(roundResultTxt);
+        updateTextDisplay(roundResultTxt, "It's a Tie!!!");
         return;
     }
 }
+
 function declareResult() {
+    toggleDisplay(playSection);
+    toggleDisplay(endSection);
     if (humanScore === computerScore) {
-        updateResult(`It's a Tie!! You both scored ${humanScore} points`);
+        updateTextDisplay(finalResultTxt, `It's a Tie!! You both scored ${humanScore} points`);
     }
     else if (humanScore > computerScore) {
-        updateResult(`You Won!! You scored ${humanScore} points`);
+        updateTextDisplay(finalResultTxt, `You Won!! You scored ${humanScore} points`);
     }
     else {
-        updateResult(`You Lost!! Computer scored ${computerScore} points`);
+        updateTextDisplay(finalResultTxt, `You Lost!! Computer scored ${computerScore} points`)
     }
-    resetBtn.classList.toggle("hidden");
+    console.log(`human score: ${humanScore}, comp score: ${computerScore}`);
 }
+
 function playRound(humanChoice, computerChoice) {
+    if (!isGameReady) {
+        return;
+    }
+    console.log(`Play Current Round Called: ${humanChoice}, ${computerChoice}`);
+
     const tie = -1;
     const humanWin = 0;
     const compWin = 1;
 
     if (currRound < maxRounds) {
+        showChoice(playerChoiceImg, humanChoice);
+        showChoice(computerChoiceImg, computerChoice);
+
+        if (humanChoice === computerChoice) {
+            updateScore(tie);
+        }
+        else if (humanChoice === "rock" && computerChoice === "scissors") {
+            updateScore(humanWin);
+        }
+        else if (humanChoice === "paper" && computerChoice === "rock") {
+            updateScore(humanWin);
+        }
+        else if (humanChoice === "scissors" && computerChoice === "paper") {
+            updateScore(humanWin);
+        }
+        else {
+            updateScore(compWin);
+        }
+
         currRound++;
-        roundTrackerElem.textContent = `Current Round: ${currRound}`;
+        updateTextDisplay(roundTrackerTxt, `Current Round: ${currRound}`);
     }
     else {
+        declareResult();
         return;
     }
 
-    if (humanChoice === computerChoice) {
-        updateResult(`Tie!! You both chose ${humanChoice}`);
-        updateScore(tie);
-    }
-    else if (humanChoice === "rock" && computerChoice === "scissors") {
-        updateResult("You Win! rock beats scissors");
-        updateScore(humanWin);
-    }
-    else if (humanChoice === "paper" && computerChoice === "rock") {
-        updateResult("You Win! paper beats rock");
-        updateScore(humanWin);
-    }
-    else if (humanChoice === "scissors" && computerChoice === "paper") {
-        updateResult("You Win! scissors beats paper");
-        updateScore(humanWin);
-    }
-    else {
-        updateResult(`You Lose! ${computerChoice} beats ${humanChoice}`);
-        updateScore(compWin);
-    }
 
-    if(currRound === maxRounds) {
-        declareResult();
-    }
+}
+function updateTextDisplay(element, str) {
+    element.textContent = str;
 }
 
-// playGame();
+const rockImg = "./img/rock.png";
+const paperImg = "./img/paper.png";
+const scissorsImg = "./img/scissors.png";
 
-const resultElem = document.querySelector(".test-text");
-const humanScoreElem = document.querySelector("#human-score");
-const computerScoreElem = document.querySelector("#computer-score");
-const roundTrackerElem = document.querySelector("#round-container");
-const resetBtn = document.querySelector("#reset");
+function showChoice(element, choice, result) {
+    showElement(element);
 
-init();
-
-function updateResult(str) {
-    resultElem.textContent = str;
-}
-
-let playerOptions = document.querySelector(".player-options");
-
-playerOptions.addEventListener('click', (e) => {
-    let target = e.target;
-
-    switch (target.id) {
+    switch (choice) {
         case 'rock':
+            updateChoiceImg(element, rockImg);
+            break;
         case 'paper':
+            updateChoiceImg(element, paperImg);
+            break;
         case 'scissors':
-            // updateResult(`${target.id} was pressed`);
-            playRound(target.id, getComputerChoice());
+            updateChoiceImg(element, scissorsImg);
             break;
-        default:
-            break;
-    };
-});
+    }
+}
 
-resetBtn.addEventListener('click', init);
+function updateChoiceImg(element, str) {
+    element.src = str;
+}

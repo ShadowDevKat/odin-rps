@@ -6,45 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="./styles.css" />
-    <!-- <script src="./rps.js" defer></script> -->
+    <script src="./rps.js" defer></script>
 </head>
 
 <body>
-    <!-- <div class="main-container">
-        <div class="header">
-            <h1 class="title-heading">Rock Paper Scissors</h1>
-            <p class="title-text">Click on any option to play round</p>
-        </div>
-        <div class="player-options">
-            <ul>
-                <li><button id="rock">✊</button></li>
-                <li><button id="paper">✋</button></li>
-                <li><button id="scissors">✌️</button></li>
-            </ul>
-        </div>
-        <div id="round-container">
-            Current Round: 99
-        </div>
-        <div class="score-container">
-            <span id="human-score">
-                Human Score: 99
-            </span>
-            <span id="computer-score">
-                Computer Score: 99
-            </span>
-        </div>
-        <div class="test-text">
-            placeholder text
-        </div>
-        <div class="reset-container">
-            <button id="reset">🔄️</button>
-        </div>
-    </div> -->
-
-    <!-- <div class="start-section">
+    <div class="start-section">
         <h1 class="title">Rock Paper Scissors!</h1>
         <button id="start-btn" class="btn-style-one">Start</button>
-    </div> -->
+    </div>
 
     <div class="play-section">
         <h1 id="round-tracker" class="title">Round 1</h1>
@@ -57,6 +26,9 @@
                 <img id="player-choice" src="./img/rock.png" alt="player choice">
                 <img id="computer-choice" src="./img/paper.png" alt="comp choice">
             </div>
+            <div class="result-container">
+                <div id="round-result" class="title-two">You Won!</div>
+            </div>
         </div>
         <div class="player-options">
             <ul>
@@ -66,6 +38,11 @@
                 </li>
             </ul>
         </div>
+    </div>
+
+    <div class="end-section">
+        <h1 id="final-result" class="title">You Won!</h1>
+        <button id="reset-btn" class="btn-style-three">Replay</button>
     </div>
 </body>
 
