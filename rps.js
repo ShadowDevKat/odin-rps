@@ -77,3 +77,25 @@ function playGame(rounds = 5){
 }
 
 // playGame();
+
+const testText = document.querySelector(".test-text");
+
+function updateElemText(elem, str) {
+    elem.textContent = str;
+}
+
+let playerOptions = document.querySelector(".player-options");
+
+playerOptions.addEventListener('click', (e) => {
+    let target = e.target;
+
+    switch(target.id) {
+        case 'rock':
+        case 'paper':
+        case 'scissors':
+            updateElemText(testText, `${target.id} was pressed`);
+            break;
+        default:
+            break;
+    };
+});

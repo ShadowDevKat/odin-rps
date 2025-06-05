@@ -17,6 +17,12 @@ body {
     gap: 16px;
 }
 
+.test-text {
+    margin-top: 50px;
+    text-align: center;
+    font-size: large;
+}
+
 .header {
     text-align: center;
 }
