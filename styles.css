@@ -1,12 +1,10 @@
 body {
     height: 100vh;
-    width: auto;
     margin: 0;
     overflow: hidden;
     font-family: Roboto, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 16px;
     background-color: lightblue;
 }
@@ -25,15 +23,14 @@ body {
 }
 
 .score-container {
-    margin-top: 25px;
     text-align: center;
     font-size: large;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     gap: 16px;
+    padding: 25px 100px;
 }
-
 
 .test-text {
     margin-top: 10px;
@@ -45,12 +42,21 @@ body {
     text-align: center;
 }
 
+.reset-container {
+    margin-top: 50px;
+    align-self: center;
+}
+
+.hidden {
+    display: none;
+}
+
 ul {
     margin: 0;
     padding: 0;
     list-style: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 12px;
 }
 

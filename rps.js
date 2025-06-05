@@ -20,6 +20,7 @@ function init() {
     computerScoreElem.textContent = `Computer Score: ${computerScore}`;
     roundTrackerElem.textContent = `Current Round: ${currRound}`;
     updateResult('');
+    resetBtn.classList.toggle("hidden");
 }
 
 function updateScore(winner) {
@@ -45,6 +46,7 @@ function declareResult() {
     else {
         updateResult(`You Lost!! Computer scored ${computerScore} points`);
     }
+    resetBtn.classList.toggle("hidden");
 }
 function playRound(humanChoice, computerChoice) {
     const tie = -1;
@@ -91,6 +93,7 @@ const resultElem = document.querySelector(".test-text");
 const humanScoreElem = document.querySelector("#human-score");
 const computerScoreElem = document.querySelector("#computer-score");
 const roundTrackerElem = document.querySelector("#round-container");
+const resetBtn = document.querySelector("#reset");
 
 init();
 
@@ -114,3 +117,5 @@ playerOptions.addEventListener('click', (e) => {
             break;
     };
 });
+
+resetBtn.addEventListener('click', init);
