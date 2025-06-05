@@ -8,6 +8,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    background-color: lightblue;
 }
 
 .main-container {
@@ -17,8 +18,25 @@ body {
     gap: 16px;
 }
 
-.test-text {
+#round-container {
     margin-top: 50px;
+    text-align: center;
+    font-size: large;
+}
+
+.score-container {
+    margin-top: 25px;
+    text-align: center;
+    font-size: large;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+
+.test-text {
+    margin-top: 10px;
     text-align: center;
     font-size: large;
 }
@@ -38,4 +56,6 @@ ul {
 
 button {
     width: 100px;
+    height: 60px;
+    /* background-color: thistle; */
 }
