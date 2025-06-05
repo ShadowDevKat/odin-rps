@@ -92,13 +92,6 @@ body {
     padding: 5px 15px;
 }
 
-#player-choice {
-    /* background-color: lightyellow; */
-}
-#computer-choice {
-    /* background-color: lightcoral; */
-}
-
 .result-container {
     padding: 4px 0px;
     flex: auto;

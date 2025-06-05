@@ -1,2 +1,2 @@
 # odin-rps
-Basic rock paper scissor game made with javascript
+Rock Paper Scissors game with UI and DOM manipulation to make it dynamic
