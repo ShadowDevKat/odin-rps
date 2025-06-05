@@ -48,7 +48,7 @@ body {
 }
 
 .hidden {
-    display: none;
+    visibility: hidden;
 }
 
 ul {
@@ -63,5 +63,25 @@ ul {
 button {
     width: 100px;
     height: 60px;
-    /* background-color: thistle; */
+}
+
+#rock,
+#paper,
+#scissors,
+#reset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    font-size: 15vw;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+}
+#rock:hover,
+#paper:hover,
+#scissors:hover,
+#reset:hover {
+    background-color: rgba(255, 255, 255, 0.357);
 }
