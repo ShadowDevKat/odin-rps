@@ -3,19 +3,25 @@ const startSection = document.querySelector('.start-section');
 const playSection = document.querySelector('.play-section');
 const endSection = document.querySelector('.end-section');
 
-function toggleDisplay(element) {
-    const originalDisplay = element.dataset.display || 'block';
-
-    if (element.style.display === 'none') {
-        element.style.display = originalDisplay;
-    } else {
-        element.dataset.display = element.style.display || getComputedStyle(element).display;
-        element.style.display = 'none';
+function toggleDisplay(element, canDisplay) {
+    if (canDisplay) {
+        element.classList.remove('is-not-displayed');
+        element.classList.add('is-displayed');
+    }
+    else {
+        element.classList.remove('is-displayed');
+        element.classList.add('is-not-displayed');
     }
 }
 
-toggleDisplay(playSection);
-toggleDisplay(endSection);
+function showElement(element) {
+    element.classList.remove('is-not-visible');
+    element.classList.add('is-visible');
+}
+function hideElement(element) {
+    element.classList.remove('is-visible');
+    element.classList.add('is-not-visible');
+}
 
 //Get Reference to body
 const mainBody = document.querySelector('body');
@@ -24,18 +30,14 @@ const mainBody = document.querySelector('body');
 mainBody.addEventListener('click', (e) => {
     let target = e.target;
     switch (target.id) {
-        case 'start-btn':
-            startGame();
-            break;
         case 'rock':
         case 'paper':
         case 'scissors':
             playRound(target.id, getComputerChoice());
             break;
+        case 'start-btn':
         case 'reset-btn':
-            toggleDisplay(endSection);
-            toggleDisplay(playSection);
-            init();
+            startGame();
             break;
         default:
             break;
@@ -43,15 +45,10 @@ mainBody.addEventListener('click', (e) => {
 });
 
 function startGame() {
-    toggleDisplay(startSection);
-    toggleDisplay(playSection);
+    toggleDisplay(endSection, false);
+    toggleDisplay(startSection, false);
+    toggleDisplay(playSection, true);
     init();
-}
-function showElement(element) {
-    element.style.visibility = 'visible';
-}
-function hideElement(element) {
-    element.style.visibility = 'hidden';
 }
 
 //Get References to all game stat elements
@@ -114,8 +111,8 @@ function updateScore(winner) {
 }
 
 function declareResult() {
-    toggleDisplay(playSection);
-    toggleDisplay(endSection);
+    toggleDisplay(playSection, false);
+    toggleDisplay(endSection, true);
     if (humanScore === computerScore) {
         updateTextDisplay(finalResultTxt, `It's a Tie!! You both scored ${humanScore} points`);
     }
@@ -176,7 +173,7 @@ const rockImg = "./img/rock.png";
 const paperImg = "./img/paper.png";
 const scissorsImg = "./img/scissors.png";
 
-function showChoice(element, choice, result) {
+function showChoice(element, choice) {
     showElement(element);
 
     switch (choice) {

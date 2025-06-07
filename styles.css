@@ -178,70 +178,16 @@ img {
     border-radius: 10px;
     pointer-events: none;
 }
-/* .main-container {
+
+.is-displayed { 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
 }
-
-#round-container {
-    margin-top: 50px;
-    text-align: center;
-    font-size: large;
+.is-not-displayed {
+    display: none;
 }
-
-.score-container {
-    text-align: center;
-    font-size: large;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 16px;
-    padding: 25px 100px;
+.is-visible {
+    visibility: visible;
 }
-
-.test-text {
-    margin-top: 10px;
-    text-align: center;
-    font-size: large;
-}
-
-.header {
-    text-align: center;
-}
-
-.reset-container {
-    margin-top: 50px;
-    align-self: center;
-}
-
-.hidden {
+.is-not-visible {
     visibility: hidden;
 }
-
-button {
-    width: 100px;
-    height: 60px;
-}
-
-#rock,
-#paper,
-#scissors,
-#reset {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0);
-    border: 0;
-    font-size: 10vw;
-    width: fit-content;
-    height: fit-content;
-    border-radius: 50%;
-}
-#rock:hover,
-#paper:hover,
-#scissors:hover,
-#reset:hover {
-    background-color: rgba(255, 255, 255, 0.357);
-} */
